@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>L'Atelier de Lou – structure fonctionnelle</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #6a2f33;
+    }
+
+    /* STATUS BANNER */
+    .status-banner {
+      background: #2b1b1c;
+      color: #f0d7a1;
+      padding: 10px 16px;
+      font-size: 12px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .wrapper {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 16px;
+      padding: 16px;
+    }
+
+    /* LEFT = VIEWER */
+    .left {
+      background: #f3a23c;
+      padding: 18px;
+      min-height: 600px;
+      overflow: auto;
+    }
+
+    .viewer img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .viewer article h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+
+    /* RIGHT */
+    .right {
+      background: #fff;
+      padding: 16px;
+      position: relative;
+    }
+
+    .bubble {
+      position: absolute;
+      top: -18px;
+      left: 40px;
+      background: #e64b3c;
+      color: #fff;
+      padding: 14px 18px;
+      border-radius: 18px;
+      font-size: 12px;
+      width: 320px;
+    }
+    .bubble::after {
+      content: "";
+      position: absolute;
+      left: 32px;
+      bottom: -10px;
+      border: 10px solid transparent;
+      border-top-color: #e64b3c;
+    }
+
+    /* MINI PAGES */
+    .pages {
+      margin-top: 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 80px);
+      gap: 10px;
+    }
+    .page {
+      background: #fafafa;
+      border: 1px solid #cfcfcf;
+      aspect-ratio: 210 / 297;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .badge-new {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #e64b3c;
+      color: #fff;
+      font-size: 9px;
+      font-weight: bold;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ARTICLES */
+    .articles {
+      margin-top: 24px;
+      display: grid;
+      gap: 14px;
+    }
+    .articles article {
+      border-top: 1px solid #ddd;
+      padding-top: 12px;
+      font-size: 12px;
+      cursor: pointer;
+      position: relative;
+    }
+    .articles h3 {
+      margin: 0 0 4px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .article-icon {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+    }
+    .articles time {
+      font-size: 11px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+<div class="status-banner">
+  BD actuellement en cours de création | Le TDAH selon "Me"
+</div>
+
+<div class="wrapper">
+
+  <section class="left">
+    <div class="viewer" id="viewer">
+      <p>Sélectionne une page ou un article.</p>
+    </div>
+  </section>
+
+  <section class="right">
+    <div class="bubble">suivez la création <br>de ma bande dessinée !</div>
+
+    <div class="pages">
+      <div class="page" data-image="https://upload.skybot.fr/uploads/698594df4b7265.99956049.jpeg" style="background-image:url('https://upload.skybot.fr/uploads/698594df4b7265.99956049.jpeg')">
+        <span class="badge-new">NEW</span>
+      </div>
+      <div class="page" data-image="planche2.jpg" style="background-image:url('planche2.jpg')"></div>
+      <div class="page" data-image="planche3.jpg" style="background-image:url('planche3.jpg')"></div>
+      <div class="page" data-image="planche4.jpg" style="background-image:url('planche4.jpg')"></div>
+    </div>
+
+    <div class="articles">
+      <article data-title="Journal de production" data-content="<p>Article complet avec texte long, images, notes et réflexions.</p>">
+        <span class="badge-new">NEW</span>
+        <h3>
+          <img src="icon-journal.png" class="article-icon" alt="">
+          Journal de production
+        </h3>
+        <time>12 janvier 2026</time>
+      </article>
+
+      <article data-title="Temps de création" data-content="<p>Analyse détaillée du temps, du doute et du processus créatif.</p>">
+        <h3>
+          <img src="icon-time.png" class="article-icon" alt="">
+          Temps de création
+        </h3>
+        <time>3 janvier 2026</time>
+      </article>
+    </div>
+  </section>
+</div>
+
+<script>
+  const viewer = document.getElementById('viewer');
+
+  document.querySelectorAll('.page').forEach(page => {
+    page.addEventListener('click', () => {
+      const img = page.dataset.image;
+      viewer.innerHTML = `<img src="${img}" alt="Planche BD">`;
+    });
+  });
+
+  document.querySelectorAll('.articles article').forEach(article => {
+    article.addEventListener('click', () => {
+      viewer.innerHTML = `
+        <article>
+          <h2>${article.dataset.title}</h2>
+          ${article.dataset.content}
+        </article>
+      `;
+    });
+  });
+</script>
+
+</body>
+</html>
