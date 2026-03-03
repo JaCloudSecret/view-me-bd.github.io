@@ -138,6 +138,61 @@
       font-size: 11px;
       color: #888;
     }
+    /* BARRE DE RECHERCHES */
+    .timeline {
+  margin-top: 70px;
+  padding-left: 28px;
+  position: relative;
+  font-size: 13px;
+  color: #9dbb8b;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #cfe3c6;
+}
+
+.step {
+  position: relative;
+  margin-bottom: 14px;
+  padding-left: 18px;
+}
+
+.step::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #9dbb8b;
+}
+
+.step.done {
+  color: #9dbb8b;
+}
+
+.step.current {
+  color: #555;
+  font-weight: bold;
+}
+
+.step.current::before {
+  background: #fff;
+  border: 2px solid #9dbb8b;
+}
+
+.step time {
+  display: block;
+  font-size: 11px;
+  color: #aaa;
+}
   </style>
 </head>
 <body>
@@ -156,7 +211,17 @@
 
   <section class="right">
     <div class="bubble">suivez la création <br>de ma bande dessinée !</div>
-
+<div class="timeline">
+  <div class="step done">Recherches</div>
+  <div class="step done">Préparation du dossier</div>
+  <div class="step done">Recherche d’un éditeur</div>
+  <div class="step done">Production : 235 / 235 pages</div>
+  <div class="step done">Corrections</div>
+  <div class="step current">
+    Sortie en librairies
+    <time>3 novembre 2021</time>
+  </div>
+</div>
     <div class="pages">
       <div class="page" data-image="planche1.jpg" style="background-image:url('planche1.jpg')">
         
